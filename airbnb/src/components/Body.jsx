@@ -1,6 +1,47 @@
-import React from 'react'
-
+import React,{useState,useEffect} from 'react'
+import {useDispatch,useSelector} from 'react-redux'
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 const Body = () => {
+    const userInfo=useSelector(state=>state.user)
+    const [hotel, setHotel] = useState([])
+    const [loading, setLoading] = useState(true)
+    const navigate=useNavigate()
+    // console.log('hello user',userInfo)
+
+    useEffect(()=>{
+        const fetchHotel=async(page,limit)=>{
+            try {
+                const response=await axios(`http://localhost:3002/api/v1/hotel/record?page=${0}&limit=${5}`)
+                console.log(response.data.record)
+                setHotel(response.data.record)
+            } catch (error) {
+                console.error('Error fetching hotel:', err);
+                setError('Something went wrong while fetching hotel');
+            }finally{
+                setLoading(false)
+            }
+        }
+
+        fetchHotel()
+    },[])    
+
+
+    if (loading) {
+        return <div className="loading" >Loading property...</div>;
+    }
+
+
+    //Below is handle if you want to open the Hotel in same page
+    // const handleHotelClick = (hotelId) => {
+    //     navigate(`/hotel/${hotelId}`);
+    // };
+
+    //Below is handle open separate Window
+    const handleHotelClick = (hotelId) => {
+        window.open(`/hotel/${hotelId}`, '_blank');
+    };
+
   return (
     <div>
         <main>
@@ -47,7 +88,7 @@ const Body = () => {
         
         <section className="listings">
             
-            <div className="listing-card">
+            {/* <div className="listing-card">
                 <div className="listing-image">
                     <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhYmlufGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60" alt="Mountain cabin" />
                     <div className="wishlist-icon"><i className="far fa-heart"></i></div>
@@ -114,10 +155,10 @@ const Body = () => {
                     <div className="listing-dates">Jan 15-22</div>
                     <div className="listing-price"><span className="price">$560</span> night</div>
                 </div>
-            </div>
+            </div> */}
 
             
-            <div className="listing-card">
+            {/* <div className="listing-card">
                 <div className="listing-image">
                     <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60" alt="Boutique hotel" />
                     <div className="wishlist-icon"><i className="far fa-heart"></i></div>
@@ -128,7 +169,24 @@ const Body = () => {
                     <div className="listing-dates">Dec 10-15</div>
                     <div className="listing-price"><span className="price">$320</span> night</div>
                 </div>
-            </div>
+            </div> */}
+
+
+            {hotel && hotel.map((item,index)=>(
+                <div key={item?.id || index} className="listing-card" onClick={() => handleHotelClick(item?.id)}>
+                    <div className="listing-image">
+                        <img src={item?.images[0]} alt="Boutique hotel" />
+                        <div className="wishlist-icon"><i className="far fa-heart"></i></div>
+                    </div>
+                    <div className="listing-details">
+                        <div className="listing-location">{item?.address}, {item?.country}</div>
+                        <div className="listing-distance">{item?.type} - {item?.reviews} Reviews</div>
+                        <div className="listing-dates">★ {item?.rating}</div>
+                        <div className="listing-price"><span className="price">${item?.price}</span> night</div>
+                    </div>
+                </div>
+            ))}
+
         </section>
     </main>
     </div>

@@ -1,0 +1,394 @@
+/* AirbnbHotelPage.css */
+
+.airbnb-hotel-page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.loading,
+.error {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 18px;
+}
+
+
+/* Header */
+
+.property-header {
+    margin-bottom: 24px;
+}
+
+.property-header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222222;
+}
+
+.property-rating {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.stars {
+    font-weight: 600;
+}
+
+.reviews {
+    color: #717171;
+    text-decoration: underline;
+}
+
+
+/* Image Gallery */
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    height: 400px;
+    margin-bottom: 48px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.main-image {
+    grid-column: 1;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.thumbnail:hover {
+    transform: scale(1.02);
+}
+
+.thumbnail.active {
+    border: 2px solid #000;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Property Content */
+
+.property-content {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 64px;
+}
+
+
+/* Host Section */
+
+.host-section {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 24px;
+}
+
+.host-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.host-info img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.host-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 22px;
+}
+
+.verified {
+    color: #008489;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+/* Features Section */
+
+.features-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 24px 0;
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 24px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+}
+
+
+/* Description & Highlights */
+
+.description-section,
+.highlights-section,
+.amenities-section,
+.reviews-section {
+    margin-bottom: 32px;
+}
+
+.description-section h2,
+.highlights-section h2,
+.amenities-section h2,
+.reviews-section h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: #222222;
+}
+
+.description-section p {
+    line-height: 1.6;
+    color: #484848;
+}
+
+.highlights-section ul {
+    padding-left: 20px;
+}
+
+.highlights-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+
+/* Amenities */
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.amenity-icon {
+    color: #008489;
+    font-weight: bold;
+}
+
+
+/* Reviews */
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.review-card {
+    padding: 16px 0;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.reviewer img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.reviewer strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.reviewer p {
+    color: #717171;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+/* Booking Widget */
+
+.booking-widget {
+    position: sticky;
+    top: 24px;
+}
+
+.price-card {
+    border: 1px solid #DDDDDD;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.price-header {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 24px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.period {
+    color: #484848;
+}
+
+.date-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #B0B0B0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.date-input {
+    padding: 12px;
+    border-right: 1px solid #B0B0B0;
+}
+
+.date-input:last-child {
+    border-right: none;
+}
+
+.date-input label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.date-input input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+.guests-selector {
+    margin-bottom: 16px;
+}
+
+.guests-selector label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.guests-selector select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #B0B0B0;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.reserve-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #E61E4D 0%, #E31C5F 50%, #D70466 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.reserve-btn:hover {
+    background: linear-gradient(135deg, #D70466 0%, #BD1E59 50%, #B02B67 100%);
+}
+
+.price-breakdown {
+    border-top: 1px solid #DDDDDD;
+    padding-top: 16px;
+}
+
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #484848;
+}
+
+.price-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid #DDDDDD;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .property-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .image-gallery {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .thumbnail-grid {
+        display: none;
+    }
+    .features-section,
+    .amenities-grid,
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+    .booking-widget {
+        position: static;
+    }
+}

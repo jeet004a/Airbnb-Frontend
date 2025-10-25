@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import './AirBnbSignup.css'; // Import the CSS file
 import { useNavigate, Link } from 'react-router-dom';
+import {signupCall} from '../apiCalls/userApiCalls'
 
 const SignUp = () => {
-    const [username, setUsername] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,10 +19,16 @@ const SignUp = () => {
     const validateForm = () => {
         const newErrors = {};
         
-        if (!username) {
-            newErrors.username = 'Username is required';
-        } else if (username.length < 3) {
-            newErrors.username = 'Username must be at least 3 characters';
+        if (!firstname) {
+            newErrors.firstname = 'Username is required';
+        } else if (firstname.length < 3) {
+            newErrors.firstname = 'Username must be at least 3 characters';
+        }
+
+        if (!lastname) {
+            newErrors.lastname = 'Username is required';
+        } else if (lastname.length < 3) {
+            newErrors.lastname = 'Username must be at least 3 characters';
         }
         
         if (!email) {
@@ -31,7 +39,7 @@ const SignUp = () => {
         
         if (!password) {
             newErrors.password = 'Password is required';
-        } else if (password.length < 6) {
+        } else if (password.length < 3) {
             newErrors.password = 'Password must be at least 6 characters';
         }
         
@@ -44,17 +52,18 @@ const SignUp = () => {
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const formErrors = validateForm();
         
         if (Object.keys(formErrors).length === 0) {
             setIsSubmitting(true);
             // Simulate API call
+            await signupCall({firstname,lastname,email,password})
             setTimeout(() => {
                 setIsSubmitting(false);
                 // Store authentication status (in real app, use context or redux)
-                localStorage.setItem('isAuthenticated', 'true');
+                // localStorage.setItem('isAuthenticated', 'true');
                 navigate('/home');
             }, 1500);
         } else {
@@ -85,21 +94,35 @@ const SignUp = () => {
                         
                         <form onSubmit={handleSubmit}>
                             <div className="airbnb-form-group">
-                                <label htmlFor="username">Username</label>
+                                <label htmlFor="username">First Name</label>
                                 <div className="airbnb-input-container">
                                     <input
                                         type="text"
-                                        id="username"
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
+                                        id="firstname"
+                                        value={firstname}
+                                        onChange={(e) => setFirstname(e.target.value)}
                                         placeholder=" "
                                     />
                                     <i className="fas fa-user airbnb-input-icon"></i>
-                                    <span className="airbnb-input-placeholder">Choose a username</span>
-                                    {errors.username && <span className="airbnb-error">{errors.username}</span>}
+                                    <span className="airbnb-input-placeholder">Enter Your Firstname</span>
+                                    {errors.firstname && <span className="airbnb-error">{errors.firstname}</span>}
                                 </div>
                             </div>
-                            
+                            <div className="airbnb-form-group">
+                                <label htmlFor="username">Last Name</label>
+                                <div className="airbnb-input-container">
+                                    <input
+                                        type="text"
+                                        id="lastname"
+                                        value={lastname}
+                                        onChange={(e) => setLastname(e.target.value)}
+                                        placeholder=" "
+                                    />
+                                    <i className="fas fa-user airbnb-input-icon"></i>
+                                    <span className="airbnb-input-placeholder">Enter Your Lastname</span>
+                                    {errors.lastname && <span className="airbnb-error">{errors.lastname}</span>}
+                                </div>
+                            </div>
                             <div className="airbnb-form-group">
                                 <label htmlFor="email">Email</label>
                                 <div className="airbnb-input-container">

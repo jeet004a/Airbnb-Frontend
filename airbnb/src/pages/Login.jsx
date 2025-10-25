@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import './AirbnbLogin.css'; // Import the CSS file
 import { useNavigate, Link } from 'react-router-dom';
+import {signinCall} from '../apiCalls/userApiCalls'
+import {useDispatch} from 'react-redux'
+import { addUser } from '../redux/slices/userSlice';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,7 +13,8 @@ const Login = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    
+    const dispatch=useDispatch()
+
     const validateForm = () => {
         const newErrors = {};
         
@@ -22,25 +26,30 @@ const Login = () => {
         
         if (!password) {
             newErrors.password = 'Password is required';
-        } else if (password.length < 6) {
+        } else if (password.length < 4) {
             newErrors.password = 'Password must be at least 6 characters';
         }
         
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const formErrors = validateForm();
         
         if (Object.keys(formErrors).length === 0) {
             setIsSubmitting(true);
             // Simulate API call
+            const userInfo=await signinCall({email,password})
+            // console.log('hello',userInfo)
+            dispatch(addUser(userInfo))
             setTimeout(() => {
                 setIsSubmitting(false);
+                
+                // console.log(email,password)
                 // Store authentication status (in real app, use context or redux)
-                localStorage.setItem('isAuthenticated', 'true');
-                navigate('/home');
+                // localStorage.setItem('isAuthenticated', 'true');
+                navigate('/home')
             }, 1500);
         } else {
             setErrors(formErrors);

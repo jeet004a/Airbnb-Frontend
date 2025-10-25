@@ -4,7 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import AirbnbHotelPage from './pages/HotelPage'
 import { BrowserRouter as  Router, Routes, Route, Navigate } from 'react-router-dom';
+import UserProfilePage from './pages/Profile'
 import SignUp from './pages/SignUp'
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +23,8 @@ function App() {
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/hotel/:id" element={<AirbnbHotelPage />} />
+        <Route path="/profile/:id" element={<UserProfilePage />} />
         <Route 
             path="/home" 
             element={
