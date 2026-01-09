@@ -24,12 +24,12 @@ const Header = () => {
         <header>
           <a href="/home" className="logo">airbnb</a>
           <div className="search-container">
-              <div className="search-item">Anywhere</div>
+              <div className="search-item" onClick={()=> navigate('/search')}>Anywhere</div>
               <div className="search-divider"></div>
-              <div className="search-item">Any week</div>
+              <div className="search-item" onClick={()=> navigate('/search')}>Any week</div>
               <div className="search-divider"></div>
-              <div className="search-item">Add guests</div>
-              <div className="search-icon">
+              <div className="search-item" onClick={()=> navigate('/search')}>Add guests</div>
+              <div className="search-icon" onClick={()=> navigate('/search')}>
                   <i className="fas fa-search"></i>
               </div>
           </div>

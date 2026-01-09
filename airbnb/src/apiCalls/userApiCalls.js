@@ -40,3 +40,19 @@ export const signupCall = async({ firstname, lastname, email, password }) => {
         console.log('error while sign up user from backend', error)
     }
 }
+
+
+export const updateUser = async(payload) => {
+    try {
+        const token = localStorage.getItem('token')
+        const response = await axios.patch(`http://localhost:3001/api/v1/auth/update/profile/${payload.id}`, payload, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        return response
+    } catch (error) {
+        console.log('Something went wrong while  updating the user info')
+    }
+}

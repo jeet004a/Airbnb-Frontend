@@ -8,6 +8,8 @@ import AirbnbHotelPage from './pages/HotelPage'
 import { BrowserRouter as  Router, Routes, Route, Navigate } from 'react-router-dom';
 import UserProfilePage from './pages/Profile'
 import SignUp from './pages/SignUp'
+import WishlistCart from './pages/WishListCart'
+import AirBnbSearch from './pages/AirbnbSearch'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -25,6 +27,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/hotel/:id" element={<AirbnbHotelPage />} />
         <Route path="/profile/:id" element={<UserProfilePage />} />
+        <Route path="/wishlist" element={<WishlistCart />} />
         <Route 
             path="/home" 
             element={
@@ -35,6 +38,7 @@ function App() {
           />
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="*" element={<div>Page not found</div>} />
+          <Route path='/search' element={<AirBnbSearch/>}></Route>
       </Routes>
       </div>
     </Router>

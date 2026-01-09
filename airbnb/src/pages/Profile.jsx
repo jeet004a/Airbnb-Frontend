@@ -3,6 +3,8 @@ import React, { useState,useEffect } from 'react';
 import './UserProfilePage.css';
 import {useParams} from 'react-router-dom'
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
+import { updateUser } from '../apiCalls/userApiCalls';
 const UserProfilePage = () => {
   // Sample data using only the fields from your schema
   const sampleUser = {
@@ -22,7 +24,7 @@ const UserProfilePage = () => {
   const {id}=useParams()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true);
-  
+  const navigate=useNavigate()
 
   useEffect(()=>{
     const fetchUser = async () => {
@@ -86,15 +88,22 @@ const UserProfilePage = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Simulate API call
+    
+    const response=await updateUser(formData)
+    // console.log('mmm',response.data.data)
+    
+    
     setTimeout(() => {
       const updatedUser = {
         ...formData,
         profileImage: previewImage
       };
-      setUser(updatedUser);
+      
+      setUser(response.data.data);
+      setData(response.data.data)
       setSuccessMessage('Profile updated successfully!');
       setIsEditing(false);
       setProfilePicture(null);
